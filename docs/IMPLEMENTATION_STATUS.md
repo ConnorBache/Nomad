@@ -3,7 +3,7 @@
 | Phase | Status | Acceptance criteria still open |
 | --- | --- | --- |
 | 0. Investigation | ADR, safety model, hardware matrix and preview schema written | Select and pin the exact Arch image and archinstall version in the installation lab |
-| 1. Windows planning preview | Wizard, hardware and volume inventory, registry application inventory, selection, metadata scanner, and JSON export implemented | Build and run hosted CI, then verify keyboard navigation and GUI in a disposable Windows VM. Complete special-entry handling and scale tests. |
+| 1. Windows planning preview | Wizard, hardware and volume inventory, registry application inventory, selection, metadata scanner, and JSON export implemented | Hosted Windows CI passed build, synthetic scanner and plan tests, and self-contained packaging. Verify keyboard navigation and GUI in a disposable Windows VM. Complete special-entry handling and scale tests. |
 | 2. Backup and restore | Pending | Resolve source paths through a consistent snapshot. Verify every byte on independent media, reject ambiguous topology, and resume after interruption. |
 | 3. Arch lab | Pending | On an isolated blank disk, install and boot Arch with KDE, then verify login, graphics, audio, networking, and updates. |
 | 4. Boot staging | Pending | Authenticate the image and exercise one-time internal boot, failed boot recovery, installer-side identity checks, and journal restart. |
