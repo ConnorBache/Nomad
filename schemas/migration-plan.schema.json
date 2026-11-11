@@ -1,0 +1,523 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Nomad read-only migration plan",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "kind",
+    "planHash",
+    "payload"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "1.0"
+    },
+    "kind": {
+      "const": "nomad-read-only-plan"
+    },
+    "planHash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "payload": {
+      "$ref": "#/$defs/payload"
+    }
+  },
+  "$defs": {
+    "payload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "computer",
+        "inventory",
+        "distribution",
+        "desktop"
+      ],
+      "properties": {
+        "computer": {
+          "$ref": "#/$defs/computer"
+        },
+        "inventory": {
+          "$ref": "#/$defs/inventory"
+        },
+        "distribution": {
+          "const": "arch"
+        },
+        "desktop": {
+          "const": "plasma"
+        }
+      }
+    },
+    "computer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "windowsVersion",
+        "windowsBuild",
+        "architecture",
+        "firmware",
+        "secureBoot",
+        "windowsDrive",
+        "hardware",
+        "issues"
+      ],
+      "properties": {
+        "windowsVersion": {
+          "type": "string"
+        },
+        "windowsBuild": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "architecture": {
+          "type": "string"
+        },
+        "firmware": {
+          "enum": [
+            "UEFI",
+            "BIOS",
+            "Unknown"
+          ]
+        },
+        "secureBoot": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "windowsDrive": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "hardware": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/hardware"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "issues": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "hardware": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "edition",
+        "memoryBytes",
+        "processors",
+        "graphics",
+        "storageControllers",
+        "networkAdapters",
+        "disks",
+        "volumes",
+        "partitions",
+        "windowsEncryption",
+        "installedApps"
+      ],
+      "properties": {
+        "edition": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "memoryBytes": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "processors": {
+          "anyOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "graphics": {
+          "anyOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "storageControllers": {
+          "anyOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "networkAdapters": {
+          "anyOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "disks": {
+          "anyOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/disk"
+              }
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "volumes": {
+          "anyOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/volume"
+              }
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "partitions": {
+          "anyOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/partition"
+              }
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "windowsEncryption": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "installedApps": {
+          "anyOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "disk": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "number",
+        "model",
+        "guid",
+        "busType",
+        "partitionStyle",
+        "healthStatus",
+        "size",
+        "isBoot",
+        "isSystem"
+      ],
+      "properties": {
+        "number": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "model": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "busType": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "partitionStyle": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "healthStatus": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "size": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "isBoot": {
+          "type": "boolean"
+        },
+        "isSystem": {
+          "type": "boolean"
+        }
+      }
+    },
+    "volume": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "driveLetter",
+        "volumeId",
+        "fileSystem",
+        "label",
+        "size",
+        "freeBytes"
+      ],
+      "properties": {
+        "driveLetter": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "volumeId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "fileSystem": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "label": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "size": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "freeBytes": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        }
+      }
+    },
+    "partition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "diskNumber",
+        "partitionNumber",
+        "guid",
+        "gptType",
+        "driveLetter",
+        "offset",
+        "size"
+      ],
+      "properties": {
+        "diskNumber": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "partitionNumber": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "guid": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "gptType": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "driveLetter": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "offset": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "size": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "inventory": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "roots",
+        "exclusions",
+        "entries",
+        "discoveryIssues"
+      ],
+      "properties": {
+        "roots": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Z]:\\\\"
+          }
+        },
+        "exclusions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Z]:\\\\"
+          }
+        },
+        "entries": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/entry"
+          }
+        },
+        "discoveryIssues": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "windowsPath",
+        "volumeId",
+        "linuxHomePath",
+        "kind",
+        "status",
+        "sizeBytes",
+        "modifiedUtc",
+        "note"
+      ],
+      "properties": {
+        "windowsPath": {
+          "type": "string",
+          "pattern": "^[A-Z]:\\\\"
+        },
+        "volumeId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "linuxHomePath": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^Migrated Windows Files/[A-Z](?:/[^/]+)*$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "kind": {
+          "enum": [
+            "unknown",
+            "directory",
+            "file"
+          ]
+        },
+        "status": {
+          "enum": [
+            "discovered",
+            "excluded",
+            "blocked"
+          ]
+        },
+        "sizeBytes": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "modifiedUtc": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "note": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "nomad-read-only-plan",
+  "planHash": "de036c661e6708912e38945707a54e61b5a879abd28796f7774cfbf961345c1e",
+  "payload": {"computer":{"windowsVersion":"Microsoft Windows NT 10.0.26100.0","windowsBuild":26100,"architecture":"X64","firmware":"UEFI","secureBoot":false,"windowsDrive":"C:","hardware":null,"issues":["Detailed Windows hardware and storage information was unavailable."]},"inventory":{"roots":["C:\\Users\\Example"],"exclusions":[],"entries":[{"windowsPath":"C:\\Users\\Example","volumeId":null,"linuxHomePath":"Migrated Windows Files/C/Users/Example","kind":"directory","status":"blocked","sizeBytes":null,"modifiedUtc":"2026-11-11T00:00:00Z","note":"A stable source volume ID was unavailable."}],"discoveryIssues":[]},"distribution":"arch","desktop":"plasma"}
+}
