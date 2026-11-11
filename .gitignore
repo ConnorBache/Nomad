@@ -1,0 +1,6 @@
+**/bin/
+**/obj/
+artifacts/
+*.user
+*.nomad-plan.json
+!tests/fixtures/*.nomad-plan.json

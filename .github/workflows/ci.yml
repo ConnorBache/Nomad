@@ -1,0 +1,26 @@
+name: Windows preview CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  preview:
+    runs-on: windows-2025
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: '10.0.x'
+      - name: Build the wizard
+        run: dotnet build src/Nomad.Windows.App --configuration Release
+      - name: Test the scanner and plan with synthetic paths
+        run: dotnet run --project tests/Nomad.Tests --configuration Release
+      - name: Publish the preview executable
+        run: dotnet publish src/Nomad.Windows.App --configuration Release --runtime win-x64 --self-contained -p:PublishSingleFile=true --output artifacts/preview
